@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Conversor.css'
 
 export default class Conversor extends Component {
 
@@ -12,7 +13,7 @@ export default class Conversor extends Component {
 
         this.converter = this.converter.bind(this);
     }
-
+    
     converter(){
         let de_para = `${this.props.moedaA}_${this.props.moedaB}`;
         let url = `https://free.currconv.com/api/v7/convert?q=${de_para}&compact=ultra&apiKey=0607bd5bae5814fdc4ec`
@@ -27,7 +28,6 @@ export default class Conversor extends Component {
             this.setState({moedaB_valor});
         })
         console.log(url);
-
     }
 
   render() {
