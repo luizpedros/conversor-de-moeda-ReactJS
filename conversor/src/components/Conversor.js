@@ -6,8 +6,8 @@ export default class Conversor extends Component {
         super(props);
     
         this.state = {
-            moedaA_valor:'',
-            moedaB_valor:'',
+            moedaA_valor:"",
+            moedaB_valor: 0,
         }
 
         this.converter = this.converter.bind(this);
@@ -17,24 +17,26 @@ export default class Conversor extends Component {
         let de_para = `${this.props.moedaA}_${this.props.moedaB}`;
         let url = `https://free.currconv.com/api/v7/convert?q=${de_para}&compact=ultra&apiKey=0607bd5bae5814fdc4ec`
 
-        fetch(url).then(res=>{
-            return res.json();
-        }).then(json=>{
-            let cotacao = json[de_para].val;
+        fetch(url)
+        .then(res=>{
+          return res.json();
+        })
+        .then(json=>{
+            let cotacao = json[de_para];
             let moedaB_valor = (parseFloat(this.state.moedaA_valor)* cotacao).toFixed(2);
             this.setState({moedaB_valor});
         })
-
+        console.log(url);
 
     }
 
   render() {
     return (
       <div className="conversor">
-        <h2>{this.props.moedaA} para {this.props.moedaA}</h2>
-        <input type="text" onChange={(event) => {this.state({moedaA_valor:event.target.value})}}></input>
+        <h2>{this.props.moedaA} para {this.props.moedaB}</h2>
+        <input type="text" onChange={(event)=>{this.setState({moedaA_valor:event.target.value})}}></input>
         <input type="button" value="converter" onClick={this.converter}></input>
-        <h3>{this.state.moedaB_valor}</h3>
+        <h3>R${this.state.moedaB_valor}</h3>
 
       </div>
     );
